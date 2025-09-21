@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Eye, EyeOff, Mail } from "lucide-react";
 
 export default function Home() {
-  const [email, setEmail] = useState("");
+  const [akun, setAkun] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
@@ -23,7 +23,7 @@ export default function Home() {
       const res = await fetch("http://localhost:3001/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ akun, password }),
         credentials: "include",
       });
 
@@ -37,7 +37,7 @@ export default function Home() {
         const data = await res.json();
         setError(
           data.message ||
-            "Login gagal. Silakan periksa email dan kata sandi Anda."
+            "Login gagal. Silakan periksa akun dan kata sandi Anda."
         );
       }
     } catch (err) {
@@ -60,13 +60,13 @@ export default function Home() {
           </div>
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="akun">Akun</Label>
               <Input
-                id="email"
-                type="email"
-                placeholder="m@contoh.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                id="akun"
+                type="text"
+                placeholder="Masukkan akun"
+                value={akun}
+                onChange={(e) => setAkun(e.target.value)}
                 required
               />
             </div>
