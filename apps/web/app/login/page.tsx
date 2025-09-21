@@ -26,19 +26,11 @@ export default function Home() {
         body: JSON.stringify({ akun, password }),
         credentials: "include",
       });
-
-      // Periksa apakah respons dari server sukses (status 200-299)
-      if (res.ok) {
-        console.log("Login berhasil!");
-        // Arahkan pengguna ke halaman dashboard
+      if (res.redirected) {
         router.push("/admin/dashboard");
       } else {
-        // Tangani kegagalan login
         const data = await res.json();
-        setError(
-          data.message ||
-            "Login gagal. Silakan periksa akun dan kata sandi Anda."
-        );
+        setError(data.message || "Login gagal");
       }
     } catch (err) {
       console.error("Kesalahan fetch:", err);
